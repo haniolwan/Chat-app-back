@@ -15,21 +15,36 @@ class UserController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        return $user->friendsTo()->get();
+        $data = $user->friendsTo()->get();
+        return $this->success_response(
+            ["Send pending requests"],
+            [$data],
+            200
+        );
     }
 
     public function pendingRequestsFrom()
     {
         /** @var User $user */
         $user = Auth::user();
-        return $user->friendsFrom()->get();
+        $data =  $user->friendsFrom()->get();
+        return $this->success_response(
+            ["Recieved pending requests"],
+            [$data],
+            200
+        );
     }
 
-  
+
     public function friends()
     {
         /** @var User $user */
         $user = Auth::user();
-        return $user->friends;
+        $data = $user->friends;
+        return $this->success_response(
+            ["All friends"],
+            [$data],
+            200
+        );
     }
 }
