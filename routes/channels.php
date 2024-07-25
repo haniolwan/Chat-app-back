@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+// This is the private channel users can subscribe to 
+
+Broadcast::channel('chat.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('channel_for_everyone', function ($user) {
+    return true;
 });
