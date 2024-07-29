@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\GotMessage;
 use App\Http\Controllers\Auth\UserAuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\FriendController;
@@ -33,4 +34,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
   Route::get('messages', [MessageController::class, 'messages']);
   Route::post('message', [MessageController::class, 'message']);
+
+  Route::get('ssss', [MessageController::class, function(){
+    event(new GotMessage('This is a test message!'));
+  }]);
+
 });

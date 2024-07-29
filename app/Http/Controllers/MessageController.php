@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GotMessage;
 use App\Jobs\SendMessage;
 use App\Models\Message;
 use Illuminate\Http\JsonResponse;
@@ -28,5 +29,10 @@ class MessageController extends Controller
             'success' => true,
             'message' => "Message created and job dispatched.",
         ]);
+    }
+    public function sendNotification()
+    {
+        // Trigger the event
+        
     }
 }

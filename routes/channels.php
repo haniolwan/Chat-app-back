@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -19,6 +20,6 @@ Broadcast::channel('chat.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('channel_for_everyone', function ($user) {
-    return true;
+Broadcast::channel('private-channel_for_everyone', function ($user) {
+    return Auth::check(); // Adjust according to your authorization logic
 });
