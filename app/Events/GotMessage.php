@@ -9,11 +9,12 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class GotMessage implements ShouldBroadcast
+class GotMessage implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -23,7 +24,7 @@ class GotMessage implements ShouldBroadcast
     public function __construct(
         $message,
     ) {
-        //
+        return $message;
     }
 
     /**
@@ -31,16 +32,8 @@ class GotMessage implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new PrivateChannel("private-channel_for_everyone"),
-        ];
-    }
-
-    public function broadcastAs()
-    {
-        Log::info('Broadcasting event with name: GotMessage');
-        return 'GotMessage';
+        return new Channel("channel");
     }
 }
