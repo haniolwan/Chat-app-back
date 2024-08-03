@@ -28,9 +28,11 @@ class UserAuthController extends Controller
         return $this->success_response(
             ["User Registered successfully"],
             ["User" => [
-                "id" => $user->id,
-                "name" => $user->name,
-                "email" => $user->email
+                'id' => $user->id,
+                'name' => $user->name,
+                'avatar' => $user->avatar,
+                'email' => $user->email,
+                'token' => $user->createToken('auth_token')->plainTextToken,
             ]],
             200
         );
@@ -48,6 +50,7 @@ class UserAuthController extends Controller
         return $this->success_response([
             'User logged in successfully',
         ], ["User" => [
+            'id' => $user->id,
             'name' => $user->name,
             'avatar' => $user->avatar,
             'email' => $user->email,
