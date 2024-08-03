@@ -28,7 +28,9 @@ class UserAuthController extends Controller
         return $this->success_response(
             ["User Registered successfully"],
             ["User" => [
-                "name" => $user->name, "email" => $user->email
+                "id" => $user->id,
+                "name" => $user->name,
+                "email" => $user->email
             ]],
             200
         );
